@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <title>MiniApi — lande</title>
+</head>
+
+<body>
+    <h1>All Countries</h1>
+
+    <ul id="list"></ul>
+
+    <script>
+        async function load() {
+            const res = await fetch("/api/countries");
+            const countries = await res.json();
+
+            document.getElementById("list").innerHTML = countries.map(c => `<li>${c.choice} — ${c.capital ?? "?"} (${c.region ?? "?"})</li>`).join("");
+        }
+
+        load();
+    </script>
+</body>
+
+</html>
