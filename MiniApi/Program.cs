@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MiniApi.Components;
 using MiniApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -25,11 +29,15 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+
 app.UseHttpsRedirection();
 
 app.UseCors();
 
 app.UseAuthorization();
+app.UseAntiforgery();
 
 app.MapControllers();
 
