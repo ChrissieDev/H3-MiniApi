@@ -7,20 +7,9 @@
 </head>
 
 <body>
-    <h1>All Countries</h1>
+    <div id="app">Loading...</div>
 
-    <ul id="list"></ul>
-
-    <script>
-        async function load() {
-            const res = await fetch("/api/countries");
-            const countries = await res.json();
-
-            document.getElementById("list").innerHTML = countries.map(c => `<li>${c.choice} — ${c.capital ?? "?"} (${c.region ?? "?"})</li>`).join("");
-        }
-
-        load();
-    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>
